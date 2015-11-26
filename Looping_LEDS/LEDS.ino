@@ -23,11 +23,10 @@ void loop() {
 
   while(!Serial.available());
 
-  int serialred = Serial.read();
-  int serialgreen = Serial.read();
-  int serialblue = Serail.read()
+  value.r =(INT)Serial.read();
+  value.g 
  
-  set_all_LED(serialred,serialgreen,serialblue);
+  set_all_LED(139,45,128);
   
    if(offset<num_leds){
     offset++;
@@ -36,8 +35,8 @@ void loop() {
   }
 
   }
-  
-  void set_all_LED(int r, int b, int g){
+
+void set_all_LED(int r, int b, int g){
   for (int i = 0; i < num_leds; i++) {
     value.r = r;
     value.g = g;
