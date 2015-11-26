@@ -11,7 +11,7 @@ int offset = 0;
 
 void setup() {
 
-  serial.begin(9600);
+  Serial.begin(9600);
   LED.setOutput(output_pin);
 
   intensity = 255;
@@ -21,11 +21,12 @@ void setup() {
 
 void loop() {
 
-  while(!Serial.available());
-
   int serialred = Serial.read();
+  Serial.println(serialred);
   int serialgreen = Serial.read();
-  int serialblue = Serail.read()
+  Serial.println(serialgreen);
+  int serialblue = Serial.read();
+  Serial.println(serialblue);
  
   set_all_LED(serialred,serialgreen,serialblue);
   
@@ -34,7 +35,7 @@ void loop() {
   }else{
     offset=0;
   }
-
+delay(10);
   }
   
   void set_all_LED(int r, int b, int g){
