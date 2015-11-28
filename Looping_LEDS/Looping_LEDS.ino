@@ -5,7 +5,7 @@
 
 WS2812 LED(num_leds);
 cRGB value; 
-byte intensity;
+byte intensity[4];
 byte sign;
 int offset = 0;
 
@@ -13,21 +13,33 @@ void setup() {
 
   Serial.begin(9600);
   LED.setOutput(output_pin);
-
-  intensity = 255;
   sign = 1;
+  Serial.println("starting");
+  set_all_LED(32,0,0);
+  delay(100);
+    set_all_LED(0,32,0);
+  delay(100);
+    set_all_LED(0,0,32);
+  delay(100);
+    set_all_LED(0,0,0);
+  delay(10);
 
 }
 
 void loop() {
 
-  int serialred = Serial.read();
+
+  byte serialred = Serial.read();
   Serial.println(serialred);
-  int serialgreen = Serial.read();
+   while(!Serial.available());
+  byte serialgreen = Serial.read();
+   while(!Serial.available());
   Serial.println(serialgreen);
-  int serialblue = Serial.read();
+  byte serialblue = Serial.read();
   Serial.println(serialblue);
- 
+
+
+  Serial.println("setting leds");
   set_all_LED(serialred,serialgreen,serialblue);
   
    if(offset<num_leds){
@@ -38,7 +50,7 @@ void loop() {
 delay(10);
   }
   
-  void set_all_LED(int r, int b, int g){
+  void set_all_LED(byte r, byte b, byte g){
   for (int i = 0; i < num_leds; i++) {
     value.r = r;
     value.g = g;
